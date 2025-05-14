@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Divergent Leaderboard</title>
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    table {
+      margin: auto;
+      border-collapse: collapse;
+      width: 80%;
+      background: #111;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #333;
+    }
+    th {
+      background: #222;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 Divergent Leaderboard</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody id="scoreTable">
+      <!-- Scores will be inserted here -->
+    </tbody>
+  </table>
+
+  <script>
+    const scores = JSON.parse(localStorage.getItem("divergentScores") || "[]");
+    const tbody = document.getElementById("scoreTable");
+
+    // Sort high to low
+    scores.sort((a, b) => b.score - a.score);
+
+    scores.forEach(entry => {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${entry.name}</td><td>${entry.score}/5</td>`;
+      tbody.appendChild(row);
+    });
+  </script>
+</body>
+</html>
