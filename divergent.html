@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Divergent Mission</title>
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+      text-align: center;
+    }
+    .mission-box {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+    }
+    .btn {
+      background: #ffffff22;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #ffffff44;
+    }
+  </style>
+</head>
+<body>
+  <div class="mission-box" id="mission">
+    <h2>✨ Divergent Mission Initiated</h2>
+    <p>You must pass through secret tests from each faction without being detected. Choose carefully.</p>
+    <button class="btn" onclick="nextChallenge()">Begin Challenge</button>
+  </div>
+
+  <script>
+    const challenges = [
+      {
+        type: "Dauntless",
+        question: "🔥 You're running on rooftops. A gap ahead is wide. What do you do?",
+        options: ["Jump without thinking", "Slow down and calculate", "Stop and go back"],
+        correct: 0
+      },
+      {
+        type: "Erudite",
+        question: "📚 Solve: What is 13 x 7?",
+        options: ["91", "84", "100"],
+        correct: 0
+      },
+      {
+        type: "Amity",
+        question: "🌸 A fight breaks out nearby. What brings peace?",
+        options: ["Music", "Yelling back", "Walking away silently"],
+        correct: 0
+      },
+      {
+        type: "Candor",
+        question: "⚖ What would you do if caught lying?",
+        options: ["Deny it", "Admit it", "Blame someone else"],
+        correct: 1
+      },
+      {
+        type: "Abnegation",
+        question: "🤝 You have one piece of food, someone is starving. Do you give it?",
+        options: ["Yes", "No", "Depends"],
+        correct: 0
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    function nextChallenge() {
+      const m = document.getElementById("mission");
+      if (current >= challenges.length) {
+        showFinalResult();
+        return;
+      }
+
+      const c = challenges[current];
+      m.innerHTML = `
+        <h2>${c.type} Test</h2>
+        <p>${c.question}</p>
+        ${c.options.map((opt, i) =>
+          `<button class="btn" onclick="checkAnswer(${i})">${opt}</button>`
+        ).join("")}
+      `;
+    }
+
+    function checkAnswer(index) {
+      if (index === challenges[current].correct) score++;
+      current++;
+      nextChallenge();
+    }
+
+    function showFinalResult() {
+      const m = document.getElementById("mission");
+      let message = score >= 3
+        ? "💫 Mission Complete! You're truly Divergent — skilled in all factions."
+        : "🕶 Mission Failed. You need to train harder to stay hidden.";
+
+      // Save score to localStorage for leaderboard
+      const existingScores = JSON.parse(localStorage.getItem("divergentScores") || "[]");
+      const userName = prompt("Enter your name for the leaderboard:");
+      if (userName) {
+        existingScores.push({ name: userName, score });
+        localStorage.setItem("divergentScores", JSON.stringify(existingScores));
+      }
+
+      m.innerHTML = `
+        <h2>Result: ${score}/5</h2>
+        <p>${message}</p>
+        <a href="leaderboard.html" style="text-decoration:none;">
+          <button class="btn">View Leaderboard</button>
+        </a>
+      `;
+    }
+  </script>
+</body>
+</html>

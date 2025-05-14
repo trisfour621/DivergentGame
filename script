@@ -1,0 +1,8 @@
+const factionBadges = {
+  Dauntless: "https://i.imgur.com/f2XJ7KT.png",
+  Erudite: "https://i.imgur.com/KJxasWd.png",
+  Amity: "https://i.imgur.com/Z97T5sa.png",
+  Candor: "https://i.imgur.com/ZlmumUJ.png",
+  Abnegation: "https://i.imgur.com/Hk8Gbd7.png",
+  Divergent: "https://i.imgur.com/kS7CJYz.png"
+};
