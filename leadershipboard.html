@@ -2,56 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Divergent Leaderboard</title>
+  <title>Leaderboard</title>
   <style>
     body {
-      background: black;
-      color: white;
       font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(#1b1b1b, #06b98d);
+      color: white;
       text-align: center;
       padding: 40px;
     }
-    table {
-      margin: auto;
-      border-collapse: collapse;
-      width: 80%;
-      background: #111;
+    .btn {
+      background: #099660aa;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
     }
-    th, td {
-      padding: 10px;
-      border: 1px solid #333;
-    }
-    th {
-      background: #222;
+    .btn:hover {
+      background: #bb2222;
     }
   </style>
 </head>
 <body>
-  <h1>🏆 Divergent Leaderboard</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody id="scoreTable">
-      <!-- Scores will be inserted here -->
-    </tbody>
-  </table>
-
-  <script>
-    const scores = JSON.parse(localStorage.getItem("divergentScores") || "[]");
-    const tbody = document.getElementById("scoreTable");
-
-    // Sort high to low
-    scores.sort((a, b) => b.score - a.score);
-
-    scores.forEach(entry => {
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${entry.name}</td><td>${entry.score}/5</td>`;
-      tbody.appendChild(row);
-    });
-  </script>
+  <h1>🏆 Divergent Mission Leaderboard</h1>
+  <p>(This is just a placeholder — scoring storage not set up yet)</p>
+  <button class="btn" onclick="location.href='index.html'">🔙 Back to Mission</button>
 </body>
 </html>
